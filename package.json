@@ -18,7 +18,8 @@
   },
   "proxy": "http://localhost:5000/",
   "scripts": {
-    "start": "react-scripts start",
+    "startDev": "react-scripts start",
+    "start": "react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
