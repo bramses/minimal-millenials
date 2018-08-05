@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env'})
 const express = require('express')
 const app = express()
-const port = process.env.port || 5000
+const port = process.env.PORT || 5000
 const email = require('./email')
 var bodyParser = require('body-parser')
 const fs = require('fs')
