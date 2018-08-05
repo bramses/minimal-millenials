@@ -17,10 +17,12 @@ app.use(bodyParser.json())
 
 const isEmailInList = async (email) => {
     try {
-        const emails = await readFile('./.flatdb.txt')
+        const emailsBuffer = await readFile('./.flatdb.txt', 'utf-8')
+        const emails = emailsBuffer.split('\n')
         if (emails.includes(email)) {
             return true
         } else {
+            
             emails.push(email)
             return writeToDB(emails)
         }
@@ -38,28 +40,27 @@ const emailsLength = async() => {
 
 const writeToDB = async (emails) => {
     emails = emails.join('\n')
-    return writeFile('./.flatdb.txt', emails, 'utf-8', function(err) {
-        if (err) throw err
-        console.log('Done!')
-    })
+    return writeFile('./.flatdb.txt', emails, 'utf-8')
 }
 
 app.post('/validate', async(req, res) => {
-    const validEmail = email.validate(req.body.email)
+    const _email = req.body.email
+    const validEmail = email.validate(_email)
+    const firstName = req.body.firstName
     if(validEmail) {
-        const emailTaken = await isEmailInList(req.body.email)
-        console.log(emailTaken)
+        const emailTaken = await isEmailInList(_email)
         if (emailTaken) {
-            console.log(`Already taken ${req.body.email}`)
+            console.log(`Already taken ${_email}`)
             res.status(500).send({'message': 'Email Taken'})
         } else {
-            console.log(`Valid ${req.body.email}`)
+            console.log(`Valid ${_email}`)
+            email.mailTo(_email, firstName)
             res.status(200).send({'message': 'Success'}) 
         }
         
 
     } else {
-        console.log(`Invalid email ${req.body.email}`)
+        console.log(`Invalid email ${_email}`)
         res.status(500).send({'message': 'Invalid email'})
     }
     

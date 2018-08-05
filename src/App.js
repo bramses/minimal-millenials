@@ -144,7 +144,7 @@ class App extends Component {
             <br />
             <br />
             <button className="myButton" onClick={evt => this.submitPledgeEvent(evt)}>Submit</button>
-            <p><em>Upon pledging, we'll send you a PDF with 7 tips to help you get started with minimalism</em></p>
+            <p><em>Upon pledging, we will send you a PDF with 7 tips to help you get started with minimalism</em></p>
           </div>
         </div>
         <div className={splashClass}>
