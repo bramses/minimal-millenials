@@ -6,7 +6,7 @@ const email = require('./email')
 var bodyParser = require('body-parser')
 const fs = require('fs')
 const util = require('util')
-const path = import('path')
+const path = require('path')
 
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
